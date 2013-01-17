@@ -47,12 +47,14 @@ $(window).ready(function() {
         .attr("height", height)
       ;
 
+    //chart background
     svg
       .append("rect")
       .attr("width", width)
       .attr("height", height)
-      .attr("stroke", 2)
-      .attr("fill", "lightblue")
+      .attr("stroke", "lightblue")
+      .attr("fill", "AliceBlue")
+      .attr("stroke-width",2)
     ;
 
     var scale = d3.scale.linear()
@@ -93,6 +95,17 @@ $(window).ready(function() {
       .attr("cy", function() {
         return height / 2;
       })
+      .on("mouseover",function(d,i){
+        d3.select(this)
+          .transition().duration(700)
+          .attr("opacity", 0)
+          .transition().duration(600)
+          .attr("r", 1000)
+          .remove()
+        ;
+
+      })
+
     ;
 
     svg
@@ -114,7 +127,8 @@ $(window).ready(function() {
       .attr("font-weight", "bold")
       .attr("fill", function(d) {
         return scale.range(["maroon", "black", "white"])(d.change);
-      });
+      })
+    ;
 
   }())
 
